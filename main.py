@@ -1,16 +1,17 @@
-# This is a sample Python script.
+import streamlit as st
+import functions
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+if os.path.exists("todos.txt") == False:
+    with open("todos.txt", "w"):
+        pass
 
+todos = functions.get_todos()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+st.title("Your Todos")
+st.write("""🚀 Jai's ToDo List: Boost Productivity! Effortless organization, customization, and security. Achieve your goals with us. Get started now!""")
 
+st.text_input(label="", placeholder="Add a todo")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+for todo in todos:
+    st.checkbox(todo)
