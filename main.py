@@ -17,7 +17,10 @@ st.write("""🚀 Jai's ToDo List: Boost Productivity! Effortless organization, c
 
 st.text_input(label="Add a todo", placeholder="Add a todo", on_change=add_todo, key="new_todo")
 
-for todo in todos:
-    st.checkbox(todo, key=todo)
-
-print(st.session_state)
+for index, todo in enumerate(todos):
+    checkbox = st.checkbox(todo, key=todo)
+    if checkbox:
+        todos.pop(index)
+        functions.write_todos(todos)
+        del st.session_state[todo]
+        st.rerun()
